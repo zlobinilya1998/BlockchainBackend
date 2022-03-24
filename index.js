@@ -1,4 +1,3 @@
-// import express from 'express';
 // import BlockchainRouter from "../BlockchainRouter.js";
 // import fetch from "node-fetch";
 // import cors from 'cors';
@@ -25,8 +24,8 @@
 
 
 
-
-const app = require('express')();
+import express from 'express';
+const app = express();
 
 const PORT = process.env.PORT || 5050;
 
