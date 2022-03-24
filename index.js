@@ -25,6 +25,7 @@
 
 
 import express from 'express';
+import product from "./api/product.js"
 const app = express();
 
 const PORT = process.env.PORT || 5050;
@@ -33,9 +34,4 @@ app.listen(PORT,() => {
     console.log('server been started on port:',PORT)
 })
 
-app.get('/api/product',async (req,res) => {
-    res.send({
-        name: 'Boots',
-        price: 120
-    })
-})
+app.get('/api/product', product)
