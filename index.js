@@ -34,4 +34,4 @@ app.listen(PORT,() => {
     console.log('server been started on port:',PORT)
 })
 
-app.get('/api/product', product)
+app.use('/api/product', product)
