@@ -33,7 +33,7 @@ app.listen(PORT,() => {
     console.log('server been started on port:',PORT)
 })
 
-app.get('api/product',async (req,res) => {
+app.get('/api/product',async (req,res) => {
     res.send({
         name: 'Boots',
         price: 120
