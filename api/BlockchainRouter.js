@@ -1,6 +1,6 @@
 import {Router} from "express";
-import {ErrorHandler} from "./helper.js";
-import {BlockchainService} from "./services/BlockchainService.js";
+import {ErrorHandler} from "../helper.js";
+import {BlockchainService} from "../services/BlockchainService.js";
 
 const BlockchainRouter = Router();
 
