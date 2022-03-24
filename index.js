@@ -1,11 +1,14 @@
 import express from 'express';
 import BlockchainRouter from "./BlockchainRouter.js";
 import fetch from "node-fetch";
-globalThis.fetch = fetch;
+import cors from 'cors';
 
+globalThis.fetch = fetch;
 const PORT = 5000;
 const app = express();
 
+
+app.use(cors())
 app.use(express.json())
 app.use('/api', BlockchainRouter)
 
