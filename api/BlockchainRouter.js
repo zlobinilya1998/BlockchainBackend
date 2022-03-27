@@ -1,12 +1,18 @@
 import {Router} from "express";
-import {ErrorHandler} from "../helper.js";
+import {OK} from "../helper.js";
 import {BlockchainService} from "../services/BlockchainService.js";
 
 const BlockchainRouter = Router();
 
 BlockchainRouter.get('/symbols', async (req, res) => {
-    const cb = async () => await BlockchainService.getSymbols();
-    await ErrorHandler(cb, res);
+    try {
+        const symbols = await BlockchainService.getSymbols();
+        if (Object.keys(symbols).length) return OK(symbols,res)
+        res.status(500).send('Ошибка сервера')
+    } catch (e) {
+        res.status(500).send('Ошибка сервера')
+    }
+
 })
 
 export default BlockchainRouter;
