@@ -11,7 +11,7 @@ export class EmailService {
         },
     })
 
-    static async sendIntoEmail(to, href) {
+    static async registrationConfirm(to, href) {
             return await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
