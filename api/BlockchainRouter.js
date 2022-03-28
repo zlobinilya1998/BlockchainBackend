@@ -14,6 +14,14 @@ BlockchainRouter.get('/symbols', async (req, res,next) => {
         next(e);
     }
 })
+BlockchainRouter.get('/symbolsList', async (req, res,next) => {
+    try {
+        const list = await BlockchainService.getSymbolsList();
+        return OK(list,res)
+    } catch (e) {
+        next(e);
+    }
+})
 BlockchainRouter.get('/symbols/:symbol', async (req, res,next) => {
     const { symbol } = req.params;
     try {

@@ -1,13 +1,13 @@
 import {Router} from "express";
 import {EmailService} from "../services/EmailService.js";
 import {OK} from "../helper.js";
-import ApiError from "../exceptions/ApiError.js";
 
 const EmailRouter = Router();
 
-EmailRouter.get('/', async (req,res,next)=>{
-    const { to, href } = req.query;
-    if (!to || !href) return res.status(400).send('Отстутствует query params:href или to');
+EmailRouter.post('/confirmRegistration', async (req,res,next)=>{
+    const { to, href } = req.body;
+    if (!to || !href) return res.status(400).send('Отстутствует обязательные параметры в req.body:href или to');
+
     try {
         await EmailService.registrationConfirm(to,href);
         return OK('Письмо успешно отправлено', res)

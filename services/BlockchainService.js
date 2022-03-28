@@ -18,5 +18,12 @@ export class BlockchainService {
     static async getTickers(){
         return await fetchUrl(this.baseUrl + '/tickers');
     }
-
+    static async getSymbolsList() {
+        let list = await this.getSymbols();
+        list = Object.keys(list).sort().map(item => ({
+            text: item,
+            value: item,
+        }));
+        return list;
+    }
 }
