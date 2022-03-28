@@ -20,9 +20,9 @@ export class BlockchainService {
     }
     static async getSymbolsList() {
         let list = await this.getSymbols();
-        list = Object.keys(list).sort().map(item => ({
-            text: item,
-            value: item,
+        list = Object.values(list).sort().map(item => ({
+            text: item.base_currency,
+            value: item.base_currency,
         }));
         return list;
     }

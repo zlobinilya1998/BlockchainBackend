@@ -2,6 +2,7 @@ import {Router} from "express";
 import {HttpError, OK} from "../helper.js";
 import {BlockchainService} from "../services/BlockchainService.js";
 import ApiError from "../exceptions/ApiError.js";
+import {param, validationResult} from "express-validator";
 
 const BlockchainRouter = Router();
 
@@ -22,7 +23,7 @@ BlockchainRouter.get('/symbolsList', async (req, res,next) => {
         next(e);
     }
 })
-BlockchainRouter.get('/symbols/:symbol', async (req, res,next) => {
+BlockchainRouter.get('/symbols/:symbol',async (req, res,next) => {
     const { symbol } = req.params;
     try {
         const symbols = await BlockchainService.getSymbol(symbol);
@@ -41,7 +42,7 @@ BlockchainRouter.get('/tickers', async (req, res, next) => {
     }
 
 })
-BlockchainRouter.get('/tickers/:symbol', async (req, res,next) => {
+BlockchainRouter.get('/tickers/:symbol',async (req, res,next) => {
     const { symbol } = req.params;
     try {
         const tickers = await BlockchainService.getTickersForSymbol(symbol);
