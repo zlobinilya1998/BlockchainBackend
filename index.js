@@ -11,7 +11,7 @@ const app = express();
 
 app.use(cors())
 app.use(express.json())
-app.use('/api',authMiddleware, ApiRouter)
+app.use('/api',ApiRouter)
 app.use(errorMiddleware)
 
 function startApp() {
