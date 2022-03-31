@@ -2,7 +2,6 @@ import {Router} from "express";
 import {HttpError, OK} from "../helper.js";
 import {BlockchainService} from "../services/BlockchainService.js";
 import ApiError from "../exceptions/ApiError.js";
-import {param, validationResult} from "express-validator";
 
 const BlockchainRouter = Router();
 
