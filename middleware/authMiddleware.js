@@ -1,10 +1,13 @@
 import ApiError from "../exceptions/ApiError.js";
-const authMiddleware = (req,res,next) => {
+
+const authMiddleware = (req, res, next) => {
     try {
-        const { authorization } = req.headers;
+        const {authorization} = req.headers;
         const token = authorization.split(' ')[1];
-        next();
-    } catch (e) {
+        if (token) return next();
+        throw ApiError.Unauthorized()
+    } catch
+        (e) {
         throw ApiError.Unauthorized();
     }
 }

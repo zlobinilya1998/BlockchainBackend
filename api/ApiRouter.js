@@ -7,7 +7,7 @@ import AuthRouter from "./AuthRouter.js";
 
 const ApiRouter = Router();
 
-ApiRouter.use('/bc', BlockchainRouter);
+ApiRouter.use('/bc',authMiddleware, BlockchainRouter);
 ApiRouter.use('/email', EmailRouter);
 ApiRouter.use('/user', UserRouter);
 ApiRouter.use('/auth', AuthRouter);
