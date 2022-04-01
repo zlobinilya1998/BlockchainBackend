@@ -7,7 +7,7 @@ import ApiError from "../exceptions/ApiError.js";
 
 const UserRouter = Router();
 
-UserRouter.post('/create', ...createUserValidators, async (req, res, next) => {
+UserRouter.post('/register', ...createUserValidators, async (req, res, next) => {
     const errors = validationResult(req);
     const haveErrors = !errors.isEmpty()
     try {

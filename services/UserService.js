@@ -1,4 +1,5 @@
 import ApiError from "../exceptions/ApiError.js";
+import TokenService from "./TokenService.js";
 
 const users = []
 
@@ -7,11 +8,9 @@ class UserService {
         if (users.find(item => item.email === user.email)) {
             throw ApiError.BadRequest('Пользователь уже существует')
         }
-        ;
         users.push(user);
-        return users;
+        return await TokenService.generateToken(user)
     }
-
     static async getUser(email) {
         const user = users.find(item => item.email === email);
         if (!user) throw ApiError.BadRequest('Такого пользователя нет');
