@@ -11,7 +11,7 @@ UserRouter.post('/register', ...createUserValidators, async (req, res, next) => 
     const errors = validationResult(req);
     const haveErrors = !errors.isEmpty()
     try {
-        if (haveErrors) throw ApiError.BadRequest();
+        if (haveErrors) throw ApiError.BadRequest('Ошибка в теле запроса', errors.errors);
 
         const {name, email, birthDate} = req.body;
         const user = await UserService.create({name, email, birthDate});
