@@ -12,7 +12,7 @@ UserRouter.get('/activate/:email', async (req, res, next) => {
     try {
        const { email } = req.params;
        await UserService.activate(email);
-       req.redirect('https://blockchain-front-vue2.vercel.app/login');
+       res.redirect('https://blockchain-front-vue2.vercel.app/login');
     } catch (e) {
         next(e)
     }
