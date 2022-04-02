@@ -8,6 +8,15 @@ import {EmailService} from "../services/EmailService.js";
 
 const UserRouter = Router();
 
+UserRouter.get('/activate/:email', async (req, res, next) => {
+    try {
+       const { email } = req.params;
+       await UserService.activate(email);
+       req.redirect('https://blockchain-front-vue2.vercel.app/login');
+    } catch (e) {
+        next(e)
+    }
+})
 UserRouter.post('/register', ...createUserValidators, async (req, res, next) => {
     const errors = validationResult(req);
     const haveErrors = !errors.isEmpty()
@@ -16,7 +25,7 @@ UserRouter.post('/register', ...createUserValidators, async (req, res, next) => 
 
         const {name, email, birthDate} = req.body;
         const user = await UserService.create({name, email, birthDate});
-        await EmailService.registrationConfirm(email,'Generated email')
+        await EmailService.registrationConfirm(email, `https://blockchain-backend.vercel.app/api/user/activate/${email}`)
         return OK(user, res)
     } catch (e) {
         next(e)

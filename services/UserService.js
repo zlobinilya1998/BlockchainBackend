@@ -16,6 +16,9 @@ class UserService {
         if (!user) throw ApiError.BadRequest('Такого пользователя нет');
         return user;
     }
+    static async activate(email) {
+        return true;
+    }
 }
 
 export default UserService;

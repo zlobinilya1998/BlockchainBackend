@@ -23,6 +23,7 @@ export class EmailService {
                         `
                     <div>
                         <h1>Подтверждение регистрациии на BlockchainBackend</h1>
+                        <a href="${href}">Ваша ссылка на активацию</a>
                     </div>
                 `
                 })
