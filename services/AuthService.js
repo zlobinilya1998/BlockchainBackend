@@ -3,8 +3,8 @@ import TokenService from "./TokenService.js";
 
 class AuthService {
     static async login(email) {
-        await UserService.getUser(email);
-        return TokenService.generateToken(email);
+        const user = await UserService.getUser(email);
+        return user;
     }
 }
 
