@@ -1,8 +1,8 @@
 import ApiError from "../exceptions/ApiError.js";
 import TokenService from "./TokenService.js";
 import db from "../db.js";
+import bcrypt from "bcrypt";
 
-const users = []
 
 class UserService {
     static async create(user) {
@@ -13,8 +13,14 @@ class UserService {
         if (rowCount > 0) {
             throw ApiError.BadRequest('Пользователь уже существует');
         }
-        const newUser = await db.query('INSERT INTO users (login,email,password) values ($1, $2, $3) RETURNING *', [login, email, password]);
-        return await TokenService.generateToken(newUser.rows[0])
+        const hashPassword = await bcrypt.hash(password, 5);
+        const newUser = await this.createUser({...user,password: hashPassword});
+        return await TokenService.generateToken(newUser);
+    }
+
+    static async createUser(user){
+        const newUser = await db.query('INSERT INTO users (login,email,password) values ($1, $2, $3) RETURNING *', [user.login, user.email, user.password]);
+        return newUser.rows[0];
     }
 
     static async getAll() {
@@ -23,7 +29,7 @@ class UserService {
     }
 
     static async getUser(email) {
-        const data = await db.query('SELECT login, email from users where email = $1',[email]);
+        const data = await db.query('SELECT login, email, password from users where email = $1',[email]);
         if (data.rowCount === 0) throw ApiError.BadRequest('Такого пользователя нет');
         return data.rows[0];
     }
